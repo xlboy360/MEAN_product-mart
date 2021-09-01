@@ -10,8 +10,10 @@
             <input matInput type="password" name="password" [(ngModel)]="password" placeholder="Password" required />
         </mat-form-field>
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="logIn()">Login</button>
-        <button mat-raised-button color="warn" (click)="logIn()">Register</button>
-    </mat-card-actions>
+    <button mat-raised-button color="primary" (click)="logIn()">Login</button>
+    <span>
+        Don't have an account?
+        <a [routerLink]="['/register']">Register</a>
+        here.
+    </span>
 </mat-card>
