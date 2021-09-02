@@ -1,10 +1,20 @@
 <header>
     <mat-toolbar color="primary">
         <mat-toolbar-row>
-            <span>SCJJ - Product Mart</span>
+            <a [routerLink]="['/home']" class="logo"></a>
+            <span class="left-spacer"></span>
             <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
             <a mat-button routerLink="/products" routerLinkActive="active-link">Products</a>
-            <a mat-button routerLink="/login" routerLinkActive="active-link">LogIn</a>
+            <a  mat-button routerLink="/login" routerLinkActive="active-link">Log In</a>
+            <div>
+                <a mat-button *ngIf="user" [matMenuTriggerFor]="menu">
+                    <mat-icon>home</mat-icon>
+                    {{user.fullName}}
+                </a>
+                <mat-menu #menu="matMenu">
+                    <button (click)="logOut()" mat-menu-button>LogOut</button>
+                </mat-menu>
+            </div>
         </mat-toolbar-row>
     </mat-toolbar>
 </header>

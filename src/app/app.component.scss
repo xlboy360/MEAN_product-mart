@@ -1,7 +1,21 @@
-a {
-  margin-left: 15px;
-}
+header {
+  a {
+    margin-left: 15px;
+  }
 
-.active-link {
+  .active-link {
     background-color: rgb(127, 9, 186);
+  }
+  .logo {
+    background-image: url(../assets/logo.png);
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .mat-icon {
+    vertical-align: middle;
+    margin: 0 5px;
+  }
 }
