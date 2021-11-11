@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of, Subject } from 'rxjs';
-
-export interface User {
-  email: string;
-  fullName: string;
-  password: string;
-}
+import { User } from '../components/user';
 
 @Injectable({
   providedIn: 'root',
@@ -20,12 +15,23 @@ export class AuthService {
     return of({ email, password });
   }
 
-  getUser() { 
+  logout() {
+    // Remove user from subject
+    this.setUser(null);
+    console.log('User did logout successfully');
+  }
+
+  getUser() {
     return this.user$.asObservable();
   }
 
   register(user: any) {
-    this.user$.next(user);
+    this.setUser(user);
+    console.log(`Register ${user} successfully`);
     return of(user);
+  }
+
+  private setUser(user: any) {
+    this.user$.next(user);
   }
 }
