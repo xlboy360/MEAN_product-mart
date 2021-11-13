@@ -25,9 +25,9 @@ export class AuthService {
     return this.user$.asObservable();
   }
 
-  register(user: any) {
+  register(user: User) {
     this.setUser(user);
-    console.log(`Register ${user} successfully`);
+    console.log(`Register ${user.fullName} successfully`);
     return of(user);
   }
 

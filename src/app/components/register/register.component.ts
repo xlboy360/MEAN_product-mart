@@ -9,20 +9,52 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  userGroup = new FormGroup({
+  userForm = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
+    repeatPassword: new FormControl('', [
+      Validators.required,
+      this.passwordsMatch,
+    ]),
   });
 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {}
 
+  get fullName() {
+    return this.userForm.get('fullName');
+  }
+
+  get email() {
+    return this.userForm.get('email');
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  get repeatPassword() {
+    return this.userForm.get('repeatPassword');
+  }
+
   register() {
-    const user = this.userGroup.getRawValue();
+    if (!this.userForm.valid) {
+      return;
+    }
+    const user = this.userForm.getRawValue();
     this.authService
       .register(user)
-      .subscribe((s) => this.router.navigate(['/login']));
+      .subscribe((s) => this.router.navigate(['/']));
+  }
+
+  passwordsMatch(control: FormControl) {
+    let password = control.root.get('password');
+    return password && control.value !== password.value
+      ? {
+          passwordMatch: true,
+        }
+      : null;
   }
 }
