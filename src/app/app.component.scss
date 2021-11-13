@@ -6,16 +6,18 @@ header {
   .active-link {
     background-color: rgb(127, 9, 186);
   }
+
   .logo {
-    background-image: url(../assets/logo.png);
+    background-image: url("../assets/images/logo.png");
     height: 50px;
     width: 50px;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-size: contain;
   }
 
   .mat-icon {
     vertical-align: middle;
-    margin: 0 5px;
+    margin: 0px 5px;
   }
 }

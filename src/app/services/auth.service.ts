@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { of, Subject } from 'rxjs';
+<<<<<<< HEAD
 import { User } from '../user';
+=======
+import { User } from '../components/user';
+>>>>>>> b083ed2def388f8cac004b2ab3a8b74df7bffa1d
 
 @Injectable({
   providedIn: 'root',
@@ -15,20 +19,19 @@ export class AuthService {
     return of({ email, password });
   }
 
-  logOut() {
-    // Clean up subject
+  logout() {
+    // Remove user from subject
     this.setUser(null);
-    console.log('User logged out');
+    console.log('User did logout successfully');
   }
 
-  get user() {
+  getUser() {
     return this.user$.asObservable();
   }
 
-  register(user: any) {
-    // Make a API call to save user in DB
+  register(user: User) {
     this.setUser(user);
-    console.log(user + ' registered successfully');
+    console.log(`Register ${user.fullName} successfully`);
     return of(user);
   }
 

@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { User } from './components/user';
 import { AuthService } from './services/auth.service';
-import { User } from './user';
 
 @Component({
   selector: 'pm-root',
@@ -10,24 +10,22 @@ import { User } from './user';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy {
-  user: User | null | undefined;
+  title = 'product-mart';
 
-  userSubscription: Subscription;
+  user?: User;
+  userSubscription?: Subscription;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.userSubscription = this.authService.user.subscribe(
-      (user) => (this.user = user)
-    );
+    this.authService.getUser().subscribe((user) => (this.user = user));
   }
-
-  logOut() {
-    this.authService.logOut();
-    this.router.navigate(['/']);
-  }
-
   ngOnDestroy(): void {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
     repeatPassword: new FormControl('', [
       Validators.required,
-      this.passwordsMatchValidator,
+      this.passwordsMatch,
     ]),
   });
 
@@ -30,17 +30,7 @@ export class RegisterComponent implements OnInit {
       : null;
   }
 
-  register() {
-    if (this.userForm.valid) {
-      return;
-    }
-    const user = this.userForm.getRawValue();
-    this.authService
-      .register(user)
-      .subscribe((s) => this.router.navigate(['/']));
-  }
-
-  get fullname() {
+  get fullName() {
     return this.userForm.get('fullName');
   }
 
@@ -55,6 +45,25 @@ export class RegisterComponent implements OnInit {
   get repeatPassword() {
     return this.userForm.get('repeatPassword');
   }
-  
+
+  register() {
+    if (!this.userForm.valid) {
+      return;
+    }
+    const user = this.userForm.getRawValue();
+    this.authService
+      .register(user)
+      .subscribe((s) => this.router.navigate(['/']));
+  }
+
+  passwordsMatch(control: FormControl) {
+    let password = control.root.get('password');
+    return password && control.value !== password.value
+      ? {
+          passwordMatch: true,
+        }
+      : null;
+  }
+
   ngOnInit(): void {}
 }
