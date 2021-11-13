@@ -1,12 +1,23 @@
 <header>
-    <mat-toolbar color="primary">
-        <mat-toolbar-row>
-            <span>SCJJ - Product Mart</span>
-            <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
-            <a mat-button routerLink="/products" routerLinkActive="active-link">Products</a>
-            <a mat-button routerLink="/login" routerLinkActive="active-link">LogIn</a>
-        </mat-toolbar-row>
-    </mat-toolbar>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a mat-icon class="logo" [routerLink]="['/home']"></a>
+      <a mat-button [routerLink]="['/home']" routerLinkActive="active-link">Home</a>
+      <a mat-button [routerLink]="['/products']" routerLinkActive="active-link">Products</a>
+      <a mat-button [routerLink]="['/login']" routerLinkActive="active-link" *ngIf="!user">
+        LogIn
+      </a>
+      <div>
+        <a mat-button *ngIf="user" [matMenuTriggerFor]="menu">
+          <mat-icon>account_circle</mat-icon>
+          {{user.fullName}}
+        </a>
+        <mat-menu #menu="matMenu">
+          <button (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </header>
 
 
