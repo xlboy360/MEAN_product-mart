@@ -13,7 +13,7 @@ if (config.env == "development") {
   app.use(logger("dev"));
 }
 
-//get dist foler
+//get dist folder
 const distDir = path.join(__dirname, "../../dist");
 
 //use dist folder by express
