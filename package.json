@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start:server": "node server/index.js",
-    "server:watch":"nodemon server",
+    "server:watch": "nodemon server",
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "npm run build -- --prod",
@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.2.0",
     "helmet": "^4.6.0",
+    "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
