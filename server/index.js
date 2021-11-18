@@ -1,20 +1,6 @@
-const express = require("express");
-const path = require("path");
+const app = require("./config/express");
+const config = require("./config/config");
 
-const port = process.env.PORT || 4260;
-const app = express();
-
-const destinationDir = path.join(__dirname, "../dist");
-
-// Hosting for dist folder
-app.use(express.static(destinationDir));
-console.log(`Express hosting from ${destinationDir}`);
-
-// Serving index.html
-app.get("*", (req, res) => {
-    res.sendFile(path.join(destinationDir, "index.html"));
+app.listen(config.port, () => {
+  console.log(`Server starten on port ${config.port} (${config.env})`);
 });
-console.log(`Serving index.html`);
-
-// Initialize and listen to PORT
-app.listen(port, () => console.log(`Express listening on ${port}`));
